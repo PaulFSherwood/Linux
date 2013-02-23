@@ -1,0 +1,86 @@
+copy tightvnc-1.3.10_unixsrc.tar.gz
+
+tar xvzf tightvnc-1.3.10_unixsrc.tar.gz
+
+cd vnc_unixsrc
+
+xmkmf
+
+make World
+
+cd Xvnc
+
+./configure
+
+make
+
+su
+
+password
+
+cd ..
+./vncinstall /usr/local/bin /usr/local/man
+
+=================================================
+
+mkdir .vnc
+
+cd .vnc
+
+touch xstartup && vim xstartup
+
+#!/bin/sh
+startkde &
+
+=================================================
+
+cd ~/
+
+touch startx.sh && vim startx.sh
+
+echo "STARTING vncserver X $* &"
+vncserver :1 -geometry :1 800x600 -depth 16
+
+touch stopx.sh && vim stopx.sh
+
+echo "STOPPING vncserver :1 -geometry :1 800x600 -depth 16 $* &"
+vncserver -kill :1
+
+==================================================
+
+on windows pc
+
+make a .bat file
+
+@echo off
+"C:\Program Files (x86)\UltraVNC\vncviewer.exe" -connect 192.168.56.101:1 -password sncmri
+
+
+================================================================
+================================================================
+http://thelinuxguru.blogspot.com/2008/02/installing-x11vnc-on-fedora-core.html
+http://sourceforge.net/projects/libvncserver/files/x11vnc/0.9.11/
+Going to http://www.karlrunge.com/x11vnc/
+
+building from source
+
+tar -xzvf x11vnc-0.9.11.tar.gz
+ls
+cd x11vnc-0.9.11
+./configure
+make
+make install
+whereis x11vnc
+
+x11vnc -display :1 -auth ~/.Xauthority
+
+=====
+x11vnc -display :1 -auth ~/.Xauthority -forever -geometry 1024x768 -o ~/vnclog_$('date')
+=====
+
+slackbuilds.org
+
+x11vnc.tar.gz   13.0
+
+
+this way wont have an icon on the desktop and wont ask for connection information.

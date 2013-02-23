@@ -1,0 +1,1 @@
+mkdir `date +"%d%m%H%M"` && ifconfig > `date +"%d%m%H%M"`/ifconfig`date +"%d%m%H%M"` && ps ux > `date +"%d%m%H%M"`/ps_ux`date +"%d%m%H%M"`

@@ -1,0 +1,1 @@
+x11vnc -display :1 -auth ~/.Xauthority -forever -geometry 1024x768

@@ -1,0 +1,8 @@
+#!/bin/sh
+sp ux > text`date +".%m.%d.%H.%M"`.txt
+
+ps axjf
+PPID PID PGID SID TTY TPGID STAT UID TIME COMMAND
+
+ps ux
+USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND

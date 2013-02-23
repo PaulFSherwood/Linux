@@ -1,0 +1,35 @@
+How to use NDIS for wireless cards without native FreeBSD support?
+
+Before you try to use Project Evil make sure that there is no native driver for your firmware, as this will definitely be your best option. Once you have made sure that there is no native driver you need to collect the following files:
+
+    * Driver Binary (a .sys file)
+    * Driver Information File (a .inf file)
+
+Sometimes you also need the following files too:
+
+    * Network Interface Firmware (usually a .bin file)
+    * Radio Firmware (also a .bin file)
+
+(Note: These files are usually found on the driver CD in the Windows drivers folder.)
+
+After you find all these files put them in a single directory on your HDD. Next you must type (at the Konsole):
+
+# su (gain root privileges)
+# Password: (don't type "Password:", type your root password at the prompt)
+# ndisgen (start NDIS wizard)
+
+This will generate a .ko file that will be used later. Copy this to /boot/kernel, then type:
+
+# su
+# Password:
+# kload ndis
+# kload if_ndis
+# kldload (the name of you .ko file)
+
+After that you need to add a few lines to /boot/loader.conf. Here they are:
+
+ndis_load="YES"
+if_ndis_load="YES"
+(name of your .ko file)_load="YES"
+
+Just reboot and the Network manager should see the Network Card.
